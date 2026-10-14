@@ -25,48 +25,54 @@ class LinkedList:
            
     def search(self,elem):
         pointer = self.head
-        cont = 0
+        cont = -1
         while  pointer:
             cont +=1
             if pointer.data == elem:
-                print(f"valor encontrado no indice : {cont}")
-                return True
+                print(f"valor '{elem}' encontrado no indice : {cont}\n")
                 break
             pointer = pointer.next
             if pointer == None:
-                print("valor não encontrado")
-                return False
+                print(" valor não encontrado !")
                 break
-        
+
+    def get(self,index):
+        pointer = self.head
+        cont = -1
+        try:
+            while cont != index:
+                cont +=1
+                if index == cont:
+                    print(f"valor encontrado no indice {index} é '{pointer.data}'")
+                    break
+                else:
+                    pointer = pointer.next
+        except AttributeError:
+            print("indice não encontrado nos nodes..")
+
     def transform(self,arr):
         for i in arr:
             self.append_node(i)
-        return self
 
 
     def del_node(self, elem):
         pointer = self.head
-        if elem == pointer.data:
-            previous = pointer
-            self.head = pointer.next
+        if self.search(elem):
+            if elem == pointer.data:
+                previous = pointer.data
+                pointer.data = pointer.next.data
+            else:
+                while pointer:
+                    if pointer.data == elem:
+                        previous.next = pointer.next
+                        break
+                    previous = pointer
+                    pointer = pointer.next
+            self.size -= 1
         else:
-            while pointer:
-                if pointer.data == elem:
-                    previous.next = pointer.next
-                    break
-                previous = pointer
-                pointer = pointer.next
-        self.size -= 1
+            print("valor pesquisado não encontrado, tem certeza que você escreveu corretamente? \n ")
+            v = "\n:)\n"
+            print(v * 3)
 
-
-lista = LinkedList()
-
-import array as arr
-
-# 1. Array de números inteiros sequenciais simples (código 'i')
-numeros_sequenciais = arr.array('i', [1, 2, 3, 4, 5,6,7,8,9,10])
-
-
-lista.transform(numeros_sequenciais)
-lista.del_node(10)
-lista.see_list()
+    def  __len__(self):
+        return self._size
