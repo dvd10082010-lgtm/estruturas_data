@@ -24,5 +24,5 @@ percebi que preciso aprimorar um pouco mais a lógica antes de me aprofundar na 
 ## terceiro commit (15/10/26):
 - sim, mais erros na "del_node", afinal, alegria de pobre dura pouco, resumidamente, o gênio aqui, com toda a sua teimosia, descidiu chamar search, com o codigo todo defasado e mal feito dentro da del, resultado...  eu tava com uma função de deletar que não conseguia deletar a self.head.
 
->[!warnig]- recomendações (não repitam meu erro):
+>[!warning]- recomendações (não repitam meu erro):
  > só usem variaveis auxiliares(especialmente com atributos de classe), se elas te ajudarem, se > elas ficarem muito confusas como "pointer.next.next.next.data",corrija imediatamente com um > looping e vá aprender POO, não seja burro que nem eu, perdendo tempo com problemas de lógica > de prog. básica...
