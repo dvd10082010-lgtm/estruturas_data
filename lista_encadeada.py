@@ -25,16 +25,14 @@ class LinkedList:
            
     def search(self,elem):
         pointer = self.head
-        cont = -1
+        cont = 0
         while  pointer:
-            cont +=1
             if pointer.data == elem:
                 print(f"valor '{elem}' encontrado no indice : {cont}\n")
-                break
+                return cont
             pointer = pointer.next
-            if pointer == None:
-                print(" valor não encontrado !")
-                break
+            cont += 1
+        print(" valor não encontrado !")
 
     def get(self,index):
         pointer = self.head
@@ -44,6 +42,7 @@ class LinkedList:
                 cont +=1
                 if index == cont:
                     print(f"valor encontrado no indice {index} é '{pointer.data}'")
+                    return True
                     break
                 else:
                     pointer = pointer.next
@@ -53,14 +52,14 @@ class LinkedList:
     def transform(self,arr):
         for i in arr:
             self.append_node(i)
+    
 
-
+            
     def del_node(self, elem):
-        pointer = self.head
-        if self.search(elem):
+            pointer = self.head
+            previous = None
             if elem == pointer.data:
-                previous = pointer.data
-                pointer.data = pointer.next.data
+                self.head = pointer.next
             else:
                 while pointer:
                     if pointer.data == elem:
@@ -69,10 +68,11 @@ class LinkedList:
                     previous = pointer
                     pointer = pointer.next
             self.size -= 1
-        else:
-            print("valor pesquisado não encontrado, tem certeza que você escreveu corretamente? \n ")
-            v = "\n:)\n"
-            print(v * 3)
+
 
     def  __len__(self):
-        return self._size
+        return self.size
+
+list = LinkedList()
+
+

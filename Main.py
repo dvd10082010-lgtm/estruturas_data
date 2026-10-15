@@ -15,6 +15,5 @@ lista_esquesita = [
     "Sinceridade", "Solidariedade", "Tolerância", "Transparência", "União"
 ]
 
-Llist.transform(lista_esquesita)
-Llist.get(49)
-Llist.search("União")
+Llist.transform(lista_esquesita)    
+
