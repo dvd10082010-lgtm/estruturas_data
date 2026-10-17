@@ -42,7 +42,6 @@ class LinkedList:
                 cont +=1
                 if index == cont:
                     print(f"valor encontrado no indice {index} é '{pointer.data}'")
-                    return True
                     break
                 else:
                     pointer = pointer.next
@@ -72,7 +71,5 @@ class LinkedList:
 
     def  __len__(self):
         return self.size
-
+    
 list = LinkedList()
-
-

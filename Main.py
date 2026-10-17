@@ -15,5 +15,6 @@ lista_esquesita = [
     "Sinceridade", "Solidariedade", "Tolerância", "Transparência", "União"
 ]
 
-Llist.transform(lista_esquesita)    
-
+Llist.transform(lista_esquesita)  
+Llist.append_node("Unção")
+x = Llist.get(50)
