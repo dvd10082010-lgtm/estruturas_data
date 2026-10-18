@@ -1,20 +1,31 @@
-def busca_binaria(arr,elem):
+def busca_binaria(arr, elem):
     less = 0 
     more = len(arr) - 1
 
     while less <= more:
-        # o looping fica responsável por atualidade os valores de more e less, já que aqui nenhum valor é constante
         mid = (more + less) // 2
-        sup = arr[mid]  
-
+        sup = arr[mid] 
+        
         if sup == elem:
             return mid
-        elif  sup < elem:
-            less = mid + 1
+        if sup > elem:
+            more = mid - 1  # Corrigido: move o limite superior para a esquerda
         else:
-            more = mid - 1
-    return None 
+            less = mid + 1  # Corrigido: move o limite inferior para a direita
+            
+    return None
 
-array =  [1,5,6,7,9,10]
-
-print(busca_binaria(array,10))
+array = [
+    "Aceitação", "Afeto", "Alegria", "Altruísmo", "Amizade", 
+    "Amor", "Aprendizado", "Autenticidade", "Autonomia", "Bondade", 
+    "Calma", "Capacidade", "Caridade", "Companheirismo", "Compaixão", 
+    "Compreensão", "Confiança", "Conhecimento", "Cooperação", "Coragem", 
+    "Criatividade", "Cuidado", "Determinação", "Disciplina", "Empatia", 
+    "Equilíbrio", "Espiritualidade", "Ética", "Família", "Foco", 
+    "Generosidade", "Gratidão", "Honestidade", "Honra", "Humildade", 
+    "Integridade", "Justiça", "Lealdade", "Liberdade", "Otimismo", 
+    "Paciência", "Perseverança", "Respeito", "Responsabilidade", "Segurança", 
+    "Sinceridade", "Solidariedade", "Tolerância", "Transparência", "União"
+]
+array.append("zacarias")
+print(busca_binaria(array,"zacarias"))
