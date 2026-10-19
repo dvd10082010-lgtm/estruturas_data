@@ -27,5 +27,3 @@ array = [
     "Paciência", "Perseverança", "Respeito", "Responsabilidade", "Segurança", 
     "Sinceridade", "Solidariedade", "Tolerância", "Transparência", "União"
 ]
-array.append("zacarias")
-print(busca_binaria(array,"zacarias"))
