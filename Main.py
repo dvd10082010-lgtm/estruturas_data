@@ -18,3 +18,7 @@ lista_esquesita = [
 Llist.transform(lista_esquesita)  
 Llist.append_node("Unção")
 x = Llist.get(50)
+
+from algoritmos.busca_binária import busca_binaria
+
+print(busca_binaria(lista_esquesita, "Amor"))
