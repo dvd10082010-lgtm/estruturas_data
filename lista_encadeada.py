@@ -67,8 +67,7 @@ class LinkedList:
                     previous = pointer
                     pointer = pointer.next
             self.size -= 1
-
-
+            
     def  __len__(self):
         return self.size
     
