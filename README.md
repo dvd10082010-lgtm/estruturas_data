@@ -478,6 +478,207 @@ print(len(Llist))
 
 O trecho acima é um exemplo ilustrativo de utilização da classe, não uma reprodução integral do `Main.py`.
 
+
+## 2.2 Quick Sort (Ordenação Rápida)
+
+**Arquivo:** `src/algoritmos/quicksort.py`  
+**Algoritmo:** Quick Sort  
+**Estratégia:** Divisão e Conquista (*Divide and Conquer*)  
+**Implementação:** Recursiva com particionamento em três grupos.
+
+O Quick Sort é um algoritmo de ordenação baseado na estratégia de divisão e conquista. Seu funcionamento consiste em selecionar um elemento denominado **pivô** e dividir os demais elementos em três grupos:
+
+- **Menores (`minor`):** elementos menores que o pivô.
+- **Iguais (`equals`):** elementos iguais ao pivô.
+- **Maiores (`moreless`):** elementos maiores que o pivô.
+
+Após a separação, o algoritmo aplica recursivamente o Quick Sort aos grupos de elementos menores e maiores. Finalmente, concatena os resultados para produzir uma sequência ordenada.
+
+### Implementação no projeto
+
+```python
+def quicksort(arr):
+    if len(arr) < 2:
+        return arr
+
+    pivot = arr[len(arr) // 2]
+    equals = [x for x in arr if x == pivot]
+    minor = [x for x in arr if x < pivot]
+    moreless = [x for x in arr if x > pivot]
+
+    return quicksort(minor) + equals + quicksort(moreless)
+```
+
+### Explicação do código
+
+**1. Caso-base**
+
+```python
+if len(arr) < 2:
+    return arr
+```
+
+Verifica se a lista possui menos de dois elementos. Nesse caso, ela já está ordenada, não sendo necessário continuar a recursão.
+
+**2. Escolha do pivô**
+
+```python
+pivot = arr[len(arr) // 2]
+```
+
+Seleciona o elemento localizado no índice central da lista.
+
+O operador `//` realiza divisão inteira, garantindo que o índice seja um número inteiro.
+
+**3. Particionamento**
+
+```python
+equals = [x for x in arr if x == pivot]
+minor = [x for x in arr if x < pivot]
+moreless = [x for x in arr if x > pivot]
+```
+
+Utiliza *list comprehensions* para construir três novas listas:
+
+- `equals`: armazena todas as ocorrências do pivô.
+- `minor`: armazena os elementos menores que o pivô.
+- `moreless`: armazena os elementos maiores que o pivô.
+
+Essa abordagem permite tratar valores duplicados diretamente, evitando chamadas recursivas desnecessárias para os elementos iguais ao pivô.
+
+**4. Recursividade e concatenação**
+
+```python
+return quicksort(minor) + equals + quicksort(moreless)
+```
+
+Executa o algoritmo recursivamente nas partições menores e maiores.
+
+A concatenação reúne os resultados na seguinte ordem:
+
+1. Elementos menores, já ordenados.
+2. Elementos iguais ao pivô.
+3. Elementos maiores, já ordenados.
+
+### Fluxograma do algoritmo
+
+```mermaid
+flowchart TD
+    A["quicksort(arr)"] --> B{"len(arr) < 2?"}
+    B -->|Sim| C["Retorna arr"]
+    B -->|Não| D["Seleciona pivô central"]
+    D --> E["Cria três partições"]
+    E --> F["minor: elementos menores"]
+    E --> G["equals: elementos iguais"]
+    E --> H["moreless: elementos maiores"]
+    F --> I["quicksort(minor)"]
+    H --> J["quicksort(moreless)"]
+    I --> K["Concatenação"]
+    G --> K
+    J --> K
+    K --> L["Retorna lista ordenada"]
+```
+
+### Exemplo de execução
+
+Considere a seguinte lista:
+
+```python
+arr = [8, 3, 1, 7, 2]
+```
+
+O elemento central é `1`, que será utilizado como pivô.
+
+A primeira divisão produz:
+
+```python
+minor = []
+equals = [1]
+moreless = [8, 3, 7, 2]
+```
+
+O algoritmo continua executando Quick Sort sobre `moreless`, até que todas as partições estejam ordenadas.
+
+Resultado final:
+
+```python
+[1, 2, 3, 7, 8]
+```
+
+### Complexidade computacional
+
+| Cenário | Complexidade |
+|---|---|
+| Melhor caso | O(n log n) |
+| Caso médio | O(n log n) |
+| Pior caso | O(n²) |
+| Espaço auxiliar médio | O(n log n) |
+| Espaço auxiliar no pior caso | O(n²) |
+
+**Observação sobre espaço:** na implementação deste projeto, as listas auxiliares são criadas em cada chamada recursiva. Considerando os elementos armazenados nas partições e as chamadas recursivas, o espaço auxiliar é O(n log n) no caso equilibrado e O(n²) no pior caso.
+
+### Análise de desempenho
+
+O desempenho do Quick Sort depende principalmente do equilíbrio entre as partições.
+
+- **Melhor caso:** ocorre quando as partições possuem tamanhos aproximadamente iguais.
+- **Caso médio:** apresenta desempenho O(n log n), sendo eficiente para diferentes distribuições de dados.
+- **Pior caso:** ocorre quando as partições ficam muito desequilibradas, fazendo com que a recursão se aproxime de O(n²).
+
+Uma característica importante desta implementação é a utilização de três partições. Ao agrupar os elementos iguais ao pivô, o algoritmo evita processá-los repetidamente em chamadas recursivas.
+
+### Aplicação no projeto
+
+O Quick Sort também é utilizado em conjunto com outros algoritmos:
+
+```python
+from quicksort import quicksort
+from minor_ import find_major
+from busca_binária import busca_binaria
+
+sorted_list = quicksort(lista)
+
+print(find_major(sorted_list))
+print(busca_binaria(sorted_list, 1000))
+```
+
+Nesse exemplo, o fluxo de execução é:
+
+1. O Quick Sort organiza os elementos da lista.
+2. `find_major()` recebe a coleção ordenada para identificar o maior elemento, conforme sua implementação.
+3. `busca_binaria()` utiliza a lista ordenada para procurar o valor `1000`.
+
+```mermaid
+flowchart TD
+    A["Lista original"] --> B["Quick Sort"]
+    B --> C["Lista ordenada"]
+    C --> D["find_major()"]
+    C --> E["busca_binaria()"]
+    D --> F["Resultado: maior elemento"]
+    E --> G["Resultado: busca pelo 1000"]
+```
+
+### Vantagens e limitações
+
+**Vantagens:**
+- Desempenho médio O(n log n).
+- Implementação relativamente simples.
+- Trata valores duplicados diretamente por meio da partição `equals`.
+- Utiliza divisão e conquista para reduzir progressivamente o problema.
+
+**Limitações:**
+- Consome memória adicional devido à criação de novas listas.
+- Possui complexidade O(n²) no pior caso.
+- Depende da profundidade da recursão.
+- Não é uma implementação *in-place*.
+
+**Considerações finais**
+
+Esta implementação demonstra a aplicação prática da recursividade e da estratégia de divisão e conquista. A utilização de três partições também permite compreender como o tratamento de elementos repetidos pode influenciar o desempenho de um algoritmo de ordenação.
+
+Uma possível evolução seria comparar essa abordagem com uma implementação *in-place*, utilizando estratégias de particionamento como Lomuto ou Hoare.
+
+
 ## Como executar
 
 Clone o repositório:
